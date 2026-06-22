@@ -1,9 +1,8 @@
 // =========================================
-//  CONFIGURACIÓN DE WHATSAPP Y MENSAJES
+//   CONFIGURACIÓN DE WHATSAPP Y MENSAJES
 // =========================================
 const numeroWhatsApp = "19295576337";
 
-// Diccionario dinámico: Relaciona el nombre del producto con su mensaje prediseñado
 const mensajesProductos = {
     "DRY-X": "¡Hola! 👋 Vi en su página web el producto para lavado sin agua *DRY-X* 💧🚫. Me parece increíble y estoy muy interesado en adquirirlo. ¿Podrían brindarme información de precio y disponibilidad? 🚘✨",
     
@@ -11,7 +10,7 @@ const mensajesProductos = {
     
     "PLASTIC X PRO": "¡Hola! 👋 Estoy buscando restaurar los plásticos de mi auto y me llamó la atención su producto *PLASTIC X PRO* 🛡️🖤. Me gustaría saber el precio y cómo es el proceso de compra. 🚙✨",
 
-    "PLASTIC X EXPRESS": "¡Hola! 👋 Estoy buscando restaurar los plásticos de mi auto y me llamó la atención su producto *PLASTIC X EXPRESS* 🛡️🖤. Me gustaría saber el precio y cómo es el proceso de compra. 🚙✨",
+    "PLASTIC X EXPRESS": "¡Hola! 👋 Estoy buscando restaurar los plásticos de mi auto de forma rápida y me llamó la atención su producto *PLASTIC X EXPRESS* 🛡️🖤. Me gustaría saber el precio. 🚙✨",
     
     "GLASS X": "¡Hola! 👋 Me interesa mucho su limpiador de vidrios *GLASS X* 🪟✨ que vi en su sitio web. Quiero una visión clara y sin manchas para mi vehículo. ¿Tienen disponibilidad? 🚘",
     
@@ -24,9 +23,8 @@ const mensajesProductos = {
     "WASH X": "¡Hola! 👋 Estoy interesado en el *WASH X* 🧽🫧 que ofrecen en su web. Busco lavar y proteger mi auto en un solo paso con acabado premium. ¿Me podrían dar información de compra? 🚙✨"
 };
 
-
 // =========================================
-//  LÓGICA DE VENTANAS MODALES (POP-UPS)
+//   LÓGICA DE VENTANAS MODALES
 // =========================================
 function abrirModal(rutaImagen, nombreProducto) {
     const modal = document.getElementById('ventanaModal');
@@ -34,71 +32,82 @@ function abrirModal(rutaImagen, nombreProducto) {
     const btnWhatsapp = document.getElementById('btnWhatsappModal');
     const textoBtn = document.getElementById('textoBtnWhatsapp');
 
-    // Mostrar modal
+    pausarAutoPlay();
+
     modal.style.display = "flex";
     imagenAmpliada.src = rutaImagen;
-    document.body.style.overflow = "hidden"; 
+    document.body.style.overflow = "hidden";
 
-    // ---- LÓGICA DINÁMICA DEL BOTÓN ----
     if (nombreProducto && mensajesProductos[nombreProducto]) {
-        // 1. Cambiamos el texto del botón
         textoBtn.textContent = `Pedir ${nombreProducto}`;
-        
-        // 2. Codificamos el mensaje para que sea una URL válida para WhatsApp
         const mensajeCodificado = encodeURIComponent(mensajesProductos[nombreProducto]);
-        
-        // 3. Reemplazamos el enlace del botón
         btnWhatsapp.href = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${mensajeCodificado}`;
     } else {
-        // Fallback: Por si en el futuro agregas un producto y olvidas ponerle mensaje
         textoBtn.textContent = "Pedir por WhatsApp";
         const msjGenerico = encodeURIComponent("¡Hola! 👋 Estoy interesado en sus productos premium de cuidado automotriz AM30 que vi en la web. ¿Me brindan asesoría? 🚘✨");
         btnWhatsapp.href = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${msjGenerico}`;
     }
-
-    pausarAutoPlay(); // Pausa el carrusel si abren un modal
 }
 
 function cerrarModal() {
     document.getElementById('ventanaModal').style.display = "none";
     document.body.style.overflow = "auto";
-    iniciarAutoPlay(); // Reanuda el carrusel al cerrar el modal
+    iniciarAutoPlay();
 }
 
 function cerrarModalFuera(evento) {
     if (evento.target.id === 'ventanaModal') cerrarModal();
 }
 
-// =========================================
-//  LÓGICA DEL CARRUSEL INFINITO AUTOMÁTICO
-// =========================================
+document.addEventListener('keydown', function(event) {
+    if (event.key === "Escape") {
+        const modal = document.getElementById('ventanaModal');
+        if (modal.style.display === "flex") {
+            cerrarModal();
+        }
+    }
+});
+
+// ===============================
+//   LÓGICA DEL CARRUSEL INFINITO
+// ===============================
 const pista = document.getElementById('pistaCarrusel');
 let presionado = false;
 let inicioX;
 let scrollIzquierdo;
 let autoPlayInterval;
+let bloqueoBotones = false;
 
-// Clonar elementos para crear el bucle visual
 const tarjetas = Array.from(pista.children);
 tarjetas.forEach(tarjeta => pista.appendChild(tarjeta.cloneNode(true)));
 tarjetas.forEach(tarjeta => pista.appendChild(tarjeta.cloneNode(true)));
 
-// Eventos para arrastre con el mouse (Drag)
+function obtenerMedidas() {
+    if (tarjetas.length === 0) return { anchoTarjeta: 0, gap: 0, anchoTotalOriginal: 0 };
+    const anchoTarjeta = tarjetas[0].offsetWidth;
+    const gap = parseFloat(window.getComputedStyle(pista).gap) || 0;
+    const anchoTotalOriginal = (anchoTarjeta + gap) * tarjetas.length;
+    return { anchoTarjeta, gap, anchoTotalOriginal };
+}
+
 pista.addEventListener('mousedown', (e) => {
     presionado = true;
-    pista.classList.add('activa');
+    pista.style.cursor = 'grabbing';
     inicioX = e.pageX - pista.offsetLeft;
     scrollIzquierdo = pista.scrollLeft;
     pausarAutoPlay();
 });
 
 pista.addEventListener('mouseleave', () => {
+    if (!presionado) return;
     presionado = false;
+    pista.style.cursor = 'grab';
     iniciarAutoPlay();
 });
 
 pista.addEventListener('mouseup', () => {
     presionado = false;
+    pista.style.cursor = 'grab';
     iniciarAutoPlay();
 });
 
@@ -106,23 +115,19 @@ pista.addEventListener('mousemove', (e) => {
     if (!presionado) return;
     e.preventDefault();
     const x = e.pageX - pista.offsetLeft;
-    const recorrido = (x - inicioX) * 2;
+    const recorrido = (x - inicioX) * 1.5;
     pista.scrollLeft = scrollIzquierdo - recorrido;
 });
 
-// Eventos para pantallas táctiles (Soporte Móvil)
 pista.addEventListener('touchstart', () => pausarAutoPlay(), {passive: true});
 pista.addEventListener('touchend', () => iniciarAutoPlay(), {passive: true});
-
-// Pausar también si solo pasan el cursor por encima (Hover amigable)
 pista.addEventListener('mouseenter', () => pausarAutoPlay());
+pista.addEventListener('mouseleave', () => iniciarAutoPlay());
 
-// Bucle invisible suave corrigiendo saltos de scroll
 pista.addEventListener('scroll', () => {
-    const gap = 30; // El espacio entre tarjetas definido en tu CSS
-    const anchoTarjeta = tarjetas[0].offsetWidth;
-    const anchoTotalOriginal = (anchoTarjeta + gap) * tarjetas.length;
-    
+    const { anchoTotalOriginal } = obtenerMedidas();
+    if (anchoTotalOriginal === 0) return;
+
     if (pista.scrollLeft >= anchoTotalOriginal * 2) {
         pista.style.scrollBehavior = 'auto'; 
         pista.scrollLeft = anchoTotalOriginal; 
@@ -137,38 +142,43 @@ pista.addEventListener('scroll', () => {
     }
 });
 
-// Posicionamiento inicial en el bloque del centro al cargar la página
-window.onload = () => {
-    const gap = 30;
-    const anchoInicial = (tarjetas[0].offsetWidth + gap) * tarjetas.length;
+window.addEventListener('load', () => {
+    const { anchoTotalOriginal } = obtenerMedidas();
     pista.style.scrollBehavior = 'auto';
-    pista.scrollLeft = anchoInicial;
+    pista.scrollLeft = anchoTotalOriginal;
     void pista.offsetWidth;
     pista.style.scrollBehavior = 'smooth';
-    iniciarAutoPlay(); // Arranca el automatismo
-};
+    iniciarAutoPlay();
+});
 
-// Función para mover con flechas manuales
 function moverCarrusel(direccion) {
-    pausarAutoPlay(); // Detiene momentáneamente el autoplay
-    const gap = 30;
-    const anchoTarjeta = tarjetas[0].clientWidth + gap;
-    pista.scrollBy({ left: anchoTarjeta * direccion, behavior: 'smooth' });
-    iniciarAutoPlay(); // Lo vuelve a activar tras el movimiento
+    if (bloqueoBotones) return;
+    bloqueoBotones = true;
+
+    pausarAutoPlay(); 
+    
+    const { anchoTarjeta, gap } = obtenerMedidas();
+    const desplazamiento = anchoTarjeta + gap;
+    
+    pista.scrollBy({ left: desplazamiento * direccion, behavior: 'smooth' });
+    
+    setTimeout(() => {
+        bloqueoBotones = false;
+        iniciarAutoPlay();
+    }, 350);
 }
 
-// Funciones de control de Autoplay
 function iniciarAutoPlay() {
-    // Limpiamos cualquier intervalo previo para evitar duplicaciones de velocidad
     clearInterval(autoPlayInterval); 
     autoPlayInterval = setInterval(() => {
-        const gap = 30;
-        const anchoTarjeta = tarjetas[0].clientWidth + gap;
-        // Se desplaza automáticamente hacia la derecha el ancho de una tarjeta
-        pista.scrollBy({ left: anchoTarjeta, behavior: 'smooth' });
-    }, 2500); // 2500ms = Se mueve cada 2.5 segundos.
+        const { anchoTarjeta, gap } = obtenerMedidas();
+        if (anchoTarjeta === 0) return;
+        pista.scrollBy({ left: anchoTarjeta + gap, behavior: 'smooth' });
+    }, 3500);
 }
 
 function pausarAutoPlay() {
-    clearInterval(autoPlayInterval);
+    if (autoPlayInterval) {
+        clearInterval(autoPlayInterval);
+    }
 }

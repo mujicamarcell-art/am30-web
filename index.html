@@ -5,44 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AM30 Detailing LLC | Cuidado Automotriz Premium</title>
 
-    <!-- Metaetiquetas para Redes Sociales -->
     <meta property="og:title" content="AM30 Detailing LLC | Cuidado Automotriz">
     <meta property="og:description" content="Fórmula premium desarrollada en EE. UU., distribución exclusiva para Venezuela.">
-    <meta property="og:image" content="https://tusitio.com/logo.jpeg">
-    <meta property="og:url" content="https://tusitio.com">
+    <meta property="og:image" content="https://www.am30detailing.com/logo.jpeg">
+    <meta property="og:url" content="https://www.am30detailing.com">
     <meta property="og:type" content="website">
 
-    <!-- Favicons -->
-    <link rel="icon" type="image/png" href="favicon-96x96.png?v=20260608" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20260608" />
-    <link rel="shortcut icon" href="favicon.ico?v=20260608" />
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=20260608" />
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png?v=20260608" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg?v=20260608" />
+    <link rel="shortcut icon" href="favicon/favicon.ico?v=20260608" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png?v=20260608" />
     <meta name="apple-mobile-web-app-title" content="AM30_DETAILING" />
-    <link rel="manifest" href="site.webmanifest?v=20260608" />
+    <link rel="manifest" href="favicon/site.webmanifest?v=20260608" />
 
-    <!-- Estilos y Fuentes -->
-    <!-- NOTA: Asegúrate de que el archivo se llame exactamente 'styls.css' -->
     <link rel="stylesheet" href="styls.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
-
-    <!-- BANNER DE COOKIES -->
     <div id="cookie-banner">
         Utilizamos cookies para mejorar su experiencia. <button onclick="aceptarCookies()">Aceptar</button>
     </div>
 
-    <script>
-        function aceptarCookies() {
-            document.getElementById('cookie-banner').style.display = 'none';
-            localStorage.setItem('cookiesAceptadas', 'true');
-        }
-        if(localStorage.getItem('cookiesAceptadas') === 'true') {
-            document.getElementById('cookie-banner').style.display = 'none';
-        }
-    </script>
-
-    <!-- BANNER DE PROMOCIÓN -->
     <div class="banner-promocion">
         PROMOCIÓN DE LANZAMIENTO EN TODOS NUESTROS PRODUCTOS
     </div>
@@ -83,9 +66,9 @@
 
             <div class="carrusel-productos" id="pistaCarrusel">
                 
-                <div class="tarjeta-producto" onclick="abrirModal('descripcion1.jpeg', 'DRY-X')">
+                <div class="tarjeta-producto" onclick="abrirModal('descripciones/descripcion1.jpeg', 'DRY-X')">
                     <div class="contenedor-imagen">
-                        <img src="producto1.png" alt="DRY-X">
+                        <img src="productos/producto1.png" alt="DRY-X">
                     </div>
                     <h3>DRY-X</h3>
                     <span class="sub-categoria">LAVADO SIN AGUA</span>
@@ -96,9 +79,9 @@
                     </div>
                 </div>
 
-                <div class="tarjeta-producto" onclick="abrirModal('descripcion2.jpeg', 'IRON X')">
+                <div class="tarjeta-producto" onclick="abrirModal('descripciones/descripcion2.jpeg', 'IRON X')">
                     <div class="contenedor-imagen">
-                        <img src="producto2.png" alt="IRON X">
+                        <img src="productos/producto2.png" alt="IRON X">
                     </div>
                     <h3>IRON X</h3>
                     <span class="sub-categoria">LIMPIADOR DE RINES</span>
@@ -109,9 +92,22 @@
                     </div>
                 </div>
 
-                <div class="tarjeta-producto" onclick="abrirModal('descripcion3.jpeg', 'PLASTIC X PRO')">
+                <div class="tarjeta-producto" onclick="abrirModal('descripciones/descripcion3.jpeg', 'PLASTIC X PRO')">
                     <div class="contenedor-imagen">
-                        <img src="producto3.png" alt="PLASTIC X PRO">
+                        <img src="productos/producto3.png" alt="PLASTIC X PRO">
+                    </div>
+                    <h3>PLASTIC X PRO</h3>
+                    <span class="sub-categoria">RESTAURADOR Y PROTECTOR</span>
+                    <div class="estrellas">★★★★★</div>
+                    <div class="contenedor-precios">
+                        <span class="precio-regular">$15.00</span>
+                        <span class="precio-promo">$12.00</span>
+                    </div>
+                </div>
+
+                <div class="tarjeta-producto" onclick="abrirModal('descripciones/descripcion4.jpeg', 'PLASTIC X EXPRESS')">
+                    <div class="contenedor-imagen">
+                        <img src="productos/producto4.png" alt="PLASTIC X EXPRESS">
                     </div>
                     <h3>PLASTIC X</h3>
                     <span class="sub-categoria">RESTAURADOR Y PROTECTOR</span>
@@ -122,22 +118,9 @@
                     </div>
                 </div>
 
-                <div class="tarjeta-producto" onclick="abrirModal('descripcion4.jpeg', 'PLASTIC X EXPRESS')">
+                <div class="tarjeta-producto" onclick="abrirModal('descripciones/descripcion5.jpeg', 'GLASS X')">
                     <div class="contenedor-imagen">
-                        <img src="producto4.png" alt="PLASTIC X EXPRESS">
-                    </div>
-                    <h3>PLASTIC X</h3>
-                    <span class="sub-categoria">RESTAURADOR Y PROTECTOR</span>
-                    <div class="estrellas">★★★★★</div>
-                    <div class="contenedor-precios">
-                        <span class="precio-regular">$15.00</span>
-                        <span class="precio-promo">$12.00</span>
-                    </div>
-                </div>
-
-                <div class="tarjeta-producto" onclick="abrirModal('descripcion5.jpeg', 'GLASS X')">
-                    <div class="contenedor-imagen">
-                        <img src="producto5.png" alt="GLASS X">
+                        <img src="productos/producto5.png" alt="GLASS X">
                     </div>
                     <h3>GLASS X</h3>
                     <span class="sub-categoria">LIMPIADOR DE VIDRIOS</span>
@@ -148,9 +131,9 @@
                     </div>
                 </div>
 
-                <div class="tarjeta-producto" onclick="abrirModal('descripcion6.jpeg', 'INNER X')">
+                <div class="tarjeta-producto" onclick="abrirModal('descripciones/descripcion6.jpeg', 'INNER X')">
                     <div class="contenedor-imagen">
-                        <img src="producto6.png" alt="INNER X">
+                        <img src="productos/producto6.png" alt="INNER X">
                     </div>
                     <h3>INNER X</h3>
                     <span class="sub-categoria">LIMPIADOR DE INTERIORES</span>
@@ -161,9 +144,9 @@
                     </div>
                 </div>
 
-                <div class="tarjeta-producto" onclick="abrirModal('descripcion7.jpeg', 'SPOT X')">
+                <div class="tarjeta-producto" onclick="abrirModal('descripciones/descripcion7.jpeg', 'SPOT X')">
                     <div class="contenedor-imagen">
-                        <img src="producto7.png" alt="SPOT X">
+                        <img src="productos/producto7.png" alt="SPOT X">
                     </div>
                     <h3>SPOT X</h3>
                     <span class="sub-categoria">REMOVEDOR DE MANCHAS DE AGUA</span>
@@ -174,9 +157,9 @@
                     </div>
                 </div>
 
-                <div class="tarjeta-producto" onclick="abrirModal('descripcion8.jpeg', 'HYDRO X')">
+                <div class="tarjeta-producto" onclick="abrirModal('descripciones/descripcion8.jpeg', 'HYDRO X')">
                     <div class="contenedor-imagen">
-                        <img src="producto8.png" alt="HYDRO X">
+                        <img src="productos/producto8.png" alt="HYDRO X">
                     </div>
                     <h3>HYDRO X</h3>
                     <span class="sub-categoria">SPRAY WAX</span>
@@ -187,9 +170,9 @@
                     </div>
                 </div>
 
-                <div class="tarjeta-producto" onclick="abrirModal('descripcion9.jpeg', 'WASH X')">
+                <div class="tarjeta-producto" onclick="abrirModal('descripciones/descripcion9.jpeg', 'WASH X')">
                     <div class="contenedor-imagen">
-                        <img src="producto9.png" alt="WASH X">
+                        <img src="productos/producto9.png" alt="WASH X">
                     </div>
                     <h3>WASH X</h3>
                     <span class="sub-categoria">SHAMPO NEUTRO</span>
@@ -201,11 +184,8 @@
                 </div>
 
             </div>
-
-            <button class="flecha-carrusel flecha-der" onclick="moverCarrusel(1)">&#10095;</button>
-
-        </div>
-    </section>
+                <button class="flecha-carrusel flecha-der" onclick="moverCarrusel(1)">&#10095;</button>
+            </div>
 
     <section id="calidad" class="seccion-calidad">
         <h2>¿Por qué elegir AM30?</h2>
@@ -228,7 +208,6 @@
         </div>
     </section>
 
-    <!-- VENTANA MODAL DEL PRODUCTO -->
     <div id="ventanaModal" class="modal" onclick="cerrarModalFuera(event)">
         <span class="cerrar-modal" onclick="cerrarModal()">&times;</span>
         <img class="contenido-modal" id="imagenAmpliada" alt="Detalle del producto">
@@ -260,11 +239,11 @@
         <h2>Lo que dicen nuestros clientes</h2>
         <div class="grid-testimonios">
             <div class="card-testimonio">
-                <p>"Proximamente."</p>
+                <p>"PROXIMAMENTE"</p>
                 <strong>- Cliente WhatsApp</strong>
             </div>
             <div class="card-testimonio">
-                <p>"Proximamente."</p>
+                <p>"PROXIMAMENTE"</p>
                 <strong>- Cliente Instagram</strong>
             </div>
         </div>
@@ -291,7 +270,8 @@
                 <p>USA: +1 (929) 557-6337</p>
             </div>
         </div>
-        <div style="text-align: center; border-top: 1px solid #333; padding-top: 20px;">
+        
+        <div style="text-align: center; border-top: 1px solid #333; padding: 20px 0 10px;">
             &copy; 2026 AM30 Detailing LLC. Todos los derechos reservados.
         </div>
 
@@ -308,7 +288,6 @@
         </div>
     </footer>
 
-    <!-- WIDGET FLOTANTE DE PROMOCIÓN -->
     <div id="widgetPromo" class="widget-flotante">
         <span class="cerrar-widget" onclick="document.getElementById('widgetPromo').style.display='none'">&times;</span>
         <div class="contenido-widget">
@@ -317,6 +296,18 @@
         </div>
     </div>
 
+    <script>
+        // Banner de Cookies
+        function aceptarCookies() {
+            document.getElementById('cookie-banner').style.display = 'none';
+            localStorage.setItem('cookiesAceptadas', 'true');
+        }
+        window.addEventListener('load', function() {
+            if(localStorage.getItem('cookiesAceptadas') === 'true') {
+                document.getElementById('cookie-banner').style.display = 'none';
+            }
+        });
+    </script>
     <script src="main.js"></script>
 </body>
 </html>
